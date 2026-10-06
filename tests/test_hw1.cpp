@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include "analysis.h"
 #include "grid.h"
 
 TEST(InBounds, InsideGrid) {
@@ -28,4 +29,17 @@ TEST(GridIndex, RowMajor) {
     EXPECT_EQ(grid_index(0, 2, 3), 2);
     EXPECT_EQ(grid_index(1, 0, 3), 3);
     EXPECT_EQ(grid_index(1, 2, 3), 5);
+}
+
+TEST(CountAbove, CountsStrictlyGreater) {
+    const double grid[6] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+    EXPECT_EQ(count_above(grid, 2, 3, 3.0), 3);
+    EXPECT_EQ(count_above(grid, 2, 3, 6.0), 0);
+    EXPECT_EQ(count_above(grid, 2, 3, 0.0), 6);
+}
+
+TEST(CountAbove, EmptyGrid) {
+    const double grid[1] = {1.0};
+    EXPECT_EQ(count_above(grid, 0, 3, 0.0), 0);
+    EXPECT_EQ(count_above(grid, 2, 0, 0.0), 0);
 }
