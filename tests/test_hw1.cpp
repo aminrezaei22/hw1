@@ -2,6 +2,7 @@
 
 #include "analysis.h"
 #include "grid.h"
+#include "station.h"
 
 TEST(InBounds, InsideGrid) {
     EXPECT_TRUE(in_bounds(0, 0, 2, 3));
@@ -42,4 +43,19 @@ TEST(CountAbove, EmptyGrid) {
     const double grid[1] = {1.0};
     EXPECT_EQ(count_above(grid, 0, 3, 0.0), 0);
     EXPECT_EQ(count_above(grid, 2, 0, 0.0), 0);
+}
+
+TEST(FindStation, FindsByExactName) {
+    const Station stations[2] = {{"Denton", 642.0}, {"Waco", 470.0}};
+    const Station* found = find_station(stations, 2, "Waco");
+    ASSERT_NE(found, nullptr);
+    EXPECT_EQ(found, &stations[1]);
+    EXPECT_DOUBLE_EQ(found->elevation_ft, 470.0);
+}
+
+TEST(FindStation, NotFoundReturnsNullptr) {
+    const Station stations[2] = {{"Denton", 642.0}, {"Waco", 470.0}};
+    EXPECT_EQ(find_station(stations, 2, "Austin"), nullptr);
+    EXPECT_EQ(find_station(stations, 2, "waco"), nullptr);
+    EXPECT_EQ(find_station(stations, 0, "Denton"), nullptr);
 }
