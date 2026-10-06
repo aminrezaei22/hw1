@@ -22,3 +22,10 @@ TEST(InBounds, EmptyGrid) {
     EXPECT_FALSE(in_bounds(0, 0, 0, 3));
     EXPECT_FALSE(in_bounds(0, 0, 2, 0));
 }
+
+TEST(GridIndex, RowMajor) {
+    EXPECT_EQ(grid_index(0, 0, 3), 0);
+    EXPECT_EQ(grid_index(0, 2, 3), 2);
+    EXPECT_EQ(grid_index(1, 0, 3), 3);
+    EXPECT_EQ(grid_index(1, 2, 3), 5);
+}

@@ -11,4 +11,13 @@
  */
 bool in_bounds(int row, int col, int rows, int cols);
 
+/**
+ * @brief Turns a row and column into an index into the flat array.
+ * @param row Row of the reading.
+ * @param col Column of the reading.
+ * @param cols Number of columns in one row.
+ * @return row * cols + col. Does not check bounds.
+ */
+int grid_index(int row, int col, int cols);
+
 #endif
