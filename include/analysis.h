@@ -11,4 +11,15 @@
  */
 int count_above(const double* temps, int rows, int cols, double threshold);
 
+/**
+ * @brief Averages one station's row of readings.
+ * @param temps Flat grid of readings.
+ * @param rows Number of rows (stations).
+ * @param cols Number of columns (days).
+ * @param station Row to average.
+ * @param average Set to the average when the call succeeds.
+ * @return false if the station is out of range or cols <= 0, otherwise true.
+ */
+bool station_average(const double* temps, int rows, int cols, int station, double& average);
+
 #endif

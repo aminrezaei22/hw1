@@ -59,3 +59,22 @@ TEST(FindStation, NotFoundReturnsNullptr) {
     EXPECT_EQ(find_station(stations, 2, "waco"), nullptr);
     EXPECT_EQ(find_station(stations, 0, "Denton"), nullptr);
 }
+
+TEST(StationAverage, AveragesOneRow) {
+    const double grid[6] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+    double avg = 0.0;
+    EXPECT_TRUE(station_average(grid, 2, 3, 0, avg));
+    EXPECT_DOUBLE_EQ(avg, 2.0);
+    EXPECT_TRUE(station_average(grid, 2, 3, 1, avg));
+    EXPECT_DOUBLE_EQ(avg, 5.0);
+}
+
+TEST(StationAverage, FailureLeavesAverageAlone) {
+    const double grid[6] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+    double avg = -1.0;
+    EXPECT_FALSE(station_average(grid, 2, 3, 2, avg));
+    EXPECT_FALSE(station_average(grid, 2, 3, -1, avg));
+    EXPECT_FALSE(station_average(grid, 2, 0, 0, avg));
+    EXPECT_FALSE(station_average(grid, 0, 3, 0, avg));
+    EXPECT_DOUBLE_EQ(avg, -1.0);
+}
