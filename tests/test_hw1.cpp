@@ -96,3 +96,31 @@ TEST(DayAverage, FailureLeavesAverageAlone) {
     EXPECT_FALSE(day_average(grid, 0, 3, 0, avg));
     EXPECT_DOUBLE_EQ(avg, -1.0);
 }
+
+TEST(FindHottest, FindsHighestReading) {
+    const double grid[6] = {1.0, 9.0, 3.0, 4.0, 5.0, 6.0};
+    int row = -1;
+    int col = -1;
+    EXPECT_TRUE(find_hottest(grid, 2, 3, row, col));
+    EXPECT_EQ(row, 0);
+    EXPECT_EQ(col, 1);
+}
+
+TEST(FindHottest, FirstInRowMajorOrderWinsTie) {
+    const double grid[4] = {5.0, 1.0, 5.0, 5.0};
+    int row = -1;
+    int col = -1;
+    EXPECT_TRUE(find_hottest(grid, 2, 2, row, col));
+    EXPECT_EQ(row, 0);
+    EXPECT_EQ(col, 0);
+}
+
+TEST(FindHottest, EmptyGridLeavesOutputsAlone) {
+    const double grid[1] = {1.0};
+    int row = -1;
+    int col = -1;
+    EXPECT_FALSE(find_hottest(grid, 0, 3, row, col));
+    EXPECT_FALSE(find_hottest(grid, 2, 0, row, col));
+    EXPECT_EQ(row, -1);
+    EXPECT_EQ(col, -1);
+}
