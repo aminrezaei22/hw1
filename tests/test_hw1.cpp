@@ -78,3 +78,21 @@ TEST(StationAverage, FailureLeavesAverageAlone) {
     EXPECT_FALSE(station_average(grid, 0, 3, 0, avg));
     EXPECT_DOUBLE_EQ(avg, -1.0);
 }
+
+TEST(DayAverage, AveragesOneColumn) {
+    const double grid[6] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+    double avg = 0.0;
+    EXPECT_TRUE(day_average(grid, 2, 3, 0, avg));
+    EXPECT_DOUBLE_EQ(avg, 2.5);
+    EXPECT_TRUE(day_average(grid, 2, 3, 2, avg));
+    EXPECT_DOUBLE_EQ(avg, 4.5);
+}
+
+TEST(DayAverage, FailureLeavesAverageAlone) {
+    const double grid[6] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
+    double avg = -1.0;
+    EXPECT_FALSE(day_average(grid, 2, 3, 3, avg));
+    EXPECT_FALSE(day_average(grid, 2, 3, -1, avg));
+    EXPECT_FALSE(day_average(grid, 0, 3, 0, avg));
+    EXPECT_DOUBLE_EQ(avg, -1.0);
+}

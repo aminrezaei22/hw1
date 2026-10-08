@@ -22,4 +22,15 @@ int count_above(const double* temps, int rows, int cols, double threshold);
  */
 bool station_average(const double* temps, int rows, int cols, int station, double& average);
 
+/**
+ * @brief Averages one day's column of readings across all stations.
+ * @param temps Flat grid of readings.
+ * @param rows Number of rows (stations).
+ * @param cols Number of columns (days).
+ * @param day Column to average.
+ * @param average Set to the average when the call succeeds.
+ * @return false if the day is out of range or rows <= 0, otherwise true.
+ */
+bool day_average(const double* temps, int rows, int cols, int day, double& average);
+
 #endif
