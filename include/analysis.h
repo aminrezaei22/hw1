@@ -33,4 +33,15 @@ bool station_average(const double* temps, int rows, int cols, int station, doubl
  */
 bool day_average(const double* temps, int rows, int cols, int day, double& average);
 
+/**
+ * @brief Finds the highest reading in the grid.
+ * @param temps Flat grid of readings.
+ * @param rows Number of rows (stations).
+ * @param cols Number of columns (days).
+ * @param hot_row Set to the row of the hottest reading.
+ * @param hot_col Set to the column of the hottest reading.
+ * @return false if rows <= 0 or cols <= 0, otherwise true.
+ */
+bool find_hottest(const double* temps, int rows, int cols, int& hot_row, int& hot_col);
+
 #endif
